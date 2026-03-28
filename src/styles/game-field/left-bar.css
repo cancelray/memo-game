@@ -1,0 +1,12 @@
+.timer {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	color: white;
+}
+
+.new-game {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}

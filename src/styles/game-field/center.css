@@ -1,0 +1,9 @@
+.game-field {
+	grid-area: b;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	max-width: 700px;
+	width: 100%;
+	margin: 0 auto;
+}
