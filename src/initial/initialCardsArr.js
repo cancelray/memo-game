@@ -20,6 +20,4 @@ const cardsArr = [
 	{ value: 'F', image: safariImg, id: crypto.randomUUID() },
 ];
 
-// export const randomCardsArr = () => cardsArr.sort(() => Math.random() - 0.5);
-
-export const randomCardsArr = () => cardsArr;
+export const randomCardsArr = () => cardsArr.sort(() => Math.random() - 0.5);
