@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { GameContext } from '../context/context';
+
+import { GameContext } from '../../context/context';
 
 const WinTimer = () => {
 	const { time, gameStart, formatTime } = useContext(GameContext);

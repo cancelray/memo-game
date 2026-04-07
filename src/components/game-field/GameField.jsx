@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 
-import { GameContext } from '../context/context';
+import { GameContext } from '../../context/context';
 
 import Card from '../UI/Card';
 
 const GameField = () => {
-	const { cardsArr, cardShow, openCards, cardClick } = useContext(GameContext);
+	const { cardsArr, cardShow, openCards, cardClick, gameVariant } =
+		useContext(GameContext);
 
 	return (
 		<div className='game-field'>
@@ -18,6 +19,7 @@ const GameField = () => {
 						openCards.firstCard && openCards.secondCard ? null : cardClick
 					}
 					cardImage={card.image}
+					gameVariant={gameVariant}
 				/>
 			))}
 		</div>

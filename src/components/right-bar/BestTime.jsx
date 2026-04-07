@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { GameContext } from '../context/context';
+import { GameContext } from '../../context/context';
 
 const BestTime = () => {
 	const { bestTimeArr, formatTime } = useContext(GameContext);
@@ -10,8 +10,8 @@ const BestTime = () => {
 			<h4>Top 5</h4>
 			{bestTimeArr.length > 0 ? (
 				<ol className='best-time'>
-					{bestTimeArr.map((time, i) => (
-						<li key={i}>{formatTime(time)}</li>
+					{bestTimeArr.map((bestTime, i) => (
+						<li key={i}>{`${bestTime.name}: ${formatTime(bestTime.time)}`}</li>
 					))}
 				</ol>
 			) : (

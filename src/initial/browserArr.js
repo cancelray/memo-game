@@ -1,11 +1,11 @@
-import braveImg from '../assets/brave.png';
-import chromeImg from '../assets/chrome.png';
-import edgeImg from '../assets/edge.png';
-import firefoxImg from '../assets/firefox.png';
-import operaImg from '../assets/opera.png';
-import safariImg from '../assets/safari.png';
+import braveImg from '../assets/browserIMG/brave.png';
+import chromeImg from '../assets/browserIMG/chrome.png';
+import edgeImg from '../assets/browserIMG/edge.png';
+import firefoxImg from '../assets/browserIMG/firefox.png';
+import operaImg from '../assets/browserIMG/opera.png';
+import safariImg from '../assets/browserIMG/safari.png';
 
-const cardsArr = [
+export const browserArr = [
 	{ value: 'A', image: braveImg, id: crypto.randomUUID() },
 	{ value: 'A', image: braveImg, id: crypto.randomUUID() },
 	{ value: 'B', image: chromeImg, id: crypto.randomUUID() },
@@ -19,5 +19,3 @@ const cardsArr = [
 	{ value: 'F', image: safariImg, id: crypto.randomUUID() },
 	{ value: 'F', image: safariImg, id: crypto.randomUUID() },
 ];
-
-export const randomCardsArr = () => cardsArr.sort(() => Math.random() - 0.5);

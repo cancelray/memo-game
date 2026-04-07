@@ -1,12 +1,15 @@
-.win-time {
-	color: green;
-}
-
 .best-times {
 	color: white;
 	margin: auto 0;
 }
 
 ol {
-	width: 100px;
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+}
+
+li {
+	list-style-position: inside;
+	align-self: flex-start;
 }

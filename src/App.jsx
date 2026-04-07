@@ -1,9 +1,11 @@
 import useGame from './hooks/useGame';
 import useTimer from './hooks/useTimer';
+import useUserName from './hooks/useUserName';
 
 import { GameContext } from './context/context';
 
-import GameWrapper from './GameWrapper';
+import GameWrapper from './components/GameWrapper';
+import Header from './components/header/Header';
 
 function App() {
 	const {
@@ -20,7 +22,19 @@ function App() {
 		cardClick,
 		time,
 		setTime,
+		gameVariant,
+		gameVariants,
+		setGameVariatn,
+		changeGameVariatn,
 	} = useGame();
+
+	const {
+		userName,
+		addUserName,
+		userNameValue,
+		userNameInputChange,
+		deleteName,
+	} = useUserName();
 
 	const { formatTime } = useTimer(
 		time,
@@ -32,6 +46,7 @@ function App() {
 		gameStart,
 		setGameStart,
 		setBestTimeArr,
+		userName,
 	);
 
 	return (
@@ -46,8 +61,18 @@ function App() {
 				gameStart,
 				startNewGame,
 				bestTimeArr,
+				userName,
+				addUserName,
+				userNameValue,
+				userNameInputChange,
+				deleteName,
+				gameVariant,
+				gameVariants,
+				setGameVariatn,
+				changeGameVariatn,
 			}}
 		>
+			<Header />
 			<GameWrapper />
 		</GameContext.Provider>
 	);

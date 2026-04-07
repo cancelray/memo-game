@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { randomCardsArr } from '../initial/initialCardsArr.js';
+import playersAPI from '../api/playersAPI.js';
+import { randomCardsArr } from '../initial/indexInitial.js';
 
 const useGame = () => {
-	const [cardsArr, setCardsArr] = useState(() => randomCardsArr());
+	const [gameVariant, setGameVariant] = useState('browser');
+	const [cardsArr, setCardsArr] = useState(() => randomCardsArr(gameVariant));
 	const [cardShow, setCardShow] = useState([
 		false,
 		false,
@@ -28,10 +30,17 @@ const useGame = () => {
 	const [time, setTime] = useState(0);
 	const [bestTimeArr, setBestTimeArr] = useState([]);
 
-	const startNewGame = () => {
+	const gameVariants = ['browser', 'tech', 'game'];
+
+	const changeGameVariatn = (variant) => {
+		setGameVariant(variant);
+		startNewGame(variant);
+	};
+
+	const startNewGame = (variant) => {
 		setGameStart(false);
 
-		setCardsArr(randomCardsArr());
+		setCardsArr(() => randomCardsArr(variant));
 
 		setCardShow([
 			false,
@@ -59,7 +68,7 @@ const useGame = () => {
 	};
 
 	const cardClick = (event) => {
-		if (!gameStart) {
+		if (!gameStart && cardShow.every((value) => value === false)) {
 			setGameStart(true);
 		}
 
@@ -67,6 +76,7 @@ const useGame = () => {
 			prev[event.target.id] = true;
 			return [...prev];
 		});
+
 		if (!openCards.firstCard) {
 			setOpenCards((prev) => {
 				prev.firstCard = cardsArr[event.target.id].value;
@@ -75,15 +85,28 @@ const useGame = () => {
 			});
 			return;
 		}
+
 		if (!openCards.secondCard && event.target.id !== openCards.firstCardId) {
 			setOpenCards((prev) => {
 				prev.secondCard = cardsArr[event.target.id].value;
 				prev.secondCardId = event.target.id;
 				return { ...prev };
 			});
+
 			return;
 		}
 	};
+
+	useEffect(() => {
+		playersAPI.getPlayers().then((data) => {
+			if (data.length < 5) {
+				setBestTimeArr(data);
+			} else {
+				const topFive = data.sort((a, b) => a.time - b.time).slice(0, 5);
+				setBestTimeArr(topFive);
+			}
+		});
+	}, []);
 
 	return {
 		cardsArr,
@@ -99,6 +122,9 @@ const useGame = () => {
 		cardClick,
 		time,
 		setTime,
+		gameVariant,
+		gameVariants,
+		changeGameVariatn,
 	};
 };
 

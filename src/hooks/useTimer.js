@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import playersAPI from '../api/playersAPI';
 
 const useTimer = (
 	time,
@@ -10,6 +11,7 @@ const useTimer = (
 	gameStart,
 	setGameStart,
 	setBestTimeArr,
+	userName,
 ) => {
 	const intervalRef = useRef(null);
 	const timeRef = useRef(time);
@@ -39,16 +41,23 @@ const useTimer = (
 					if (cardShow.every((val) => val === true)) {
 						setGameStart(false);
 
+						const newWinner = {
+							name: userName.length > 0 ? userName : 'Anonymous',
+							time: timeRef.current,
+						};
+
+						playersAPI.addTime(newWinner);
+
 						setBestTimeArr((prev) => {
 							if (prev.length < 5) {
-								return [...prev, timeRef.current].sort((a, b) => a - b);
+								return [...prev, newWinner].sort((a, b) => a.time - b.time);
 							} else {
-								const index = prev.findIndex((el) => el > timeRef.current);
+								const index = prev.findIndex((el) => el.time > timeRef.current);
 								if (index === -1) {
 									return [...prev];
 								} else {
-									return [...prev, timeRef.current]
-										.sort((a, b) => a - b)
+									return [...prev, newWinner]
+										.sort((a, b) => a.time - b.time)
 										.slice(0, -1);
 								}
 							}
