@@ -1,11 +1,13 @@
-import { cardBack } from '../../initial/indexInitial';
+import { cardBack } from '../../../initial/indexInitial';
+
+import styles from './Card.module.css';
 
 const Card = (props) => {
 	const { id, cardImage, cardShow, cardClick, gameVariant } = props;
 
 	return (
 		<div
-			className={`card ${cardShow ? 'green' : 'red'}`}
+			className={`${styles.card} ${cardShow ? styles.green : styles.red}`}
 			id={id}
 			onClick={cardClick}
 		>

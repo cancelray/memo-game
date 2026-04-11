@@ -1,50 +1,37 @@
-.timer {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	color: white;
-}
-
-.user-name-div {
+.userNameDiv {
 	display: flex;
 	flex-direction: column;
 }
 
-.player-name {
+.playerName {
 	margin-bottom: 100px;
 }
-.player-name button {
+.playerName button {
 	width: 40%;
 	height: 30%;
 	padding: 1px;
 	font-size: 15px;
 	color: brown;
 }
-.player-name .button:hover {
+.playerName .button:hover {
 	box-shadow: 0 0 1px 1px aquamarine;
 }
-.player-name h3 {
+.playerName h3 {
 	color: aqua;
 }
 
-.user-name-form {
+.userNameForm {
 	display: flex;
 	flex-direction: column;
 }
 
-.user-name-form input {
+.userNameInput {
 	margin-bottom: 10px;
 	border-radius: 3px;
 }
 
-.user-name-form button {
+.userNameForm button {
 	width: 100px;
 	height: 40px;
 	margin: 0 auto;
-}
-
-.new-game {
-	display: flex;
-	justify-content: center;
-	width: 100%;
 }

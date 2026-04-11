@@ -4,7 +4,7 @@ import useUserName from './hooks/useUserName';
 
 import { GameContext } from './context/context';
 
-import GameWrapper from './components/GameWrapper';
+import GameWrapper from './components/GameWrapper/GameWrapper';
 import Header from './components/header/Header';
 
 function App() {

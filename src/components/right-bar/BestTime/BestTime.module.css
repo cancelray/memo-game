@@ -1,15 +1,15 @@
-.best-times {
+.bestTimes {
 	color: white;
 	margin: auto 0;
 }
 
-ol {
+.bestTime {
 	display: flex;
 	flex-direction: column;
 	width: 200px;
 }
 
-li {
+.bestTime li {
 	list-style-position: inside;
 	align-self: flex-start;
 }
