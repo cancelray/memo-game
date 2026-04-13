@@ -4,8 +4,12 @@ import useUserName from './hooks/useUserName';
 
 import { GameContext } from './context/context';
 
-import GameWrapper from './components/GameWrapper/GameWrapper';
-import Header from './components/header/Header';
+import PageNotFound from './components/404/PageNotFound';
+import Header from './components/Header/Header';
+import GamePage from './pages/GamePage/GamePage';
+import IndexPage from './pages/IndexPage/IndexPage';
+import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage';
+import Router from './Router';
 
 function App() {
 	const {
@@ -49,6 +53,13 @@ function App() {
 		userName,
 	);
 
+	const routes = {
+		'/': IndexPage,
+		'/game': GamePage,
+		'/leaderboard': LeaderboardPage,
+		'*': PageNotFound,
+	};
+
 	return (
 		<GameContext.Provider
 			value={{
@@ -73,7 +84,7 @@ function App() {
 			}}
 		>
 			<Header />
-			<GameWrapper />
+			<Router routes={routes} />
 		</GameContext.Provider>
 	);
 }
