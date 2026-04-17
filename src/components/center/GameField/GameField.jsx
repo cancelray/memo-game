@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
-import { GameContext } from '../../context/context';
+import { GameContext } from '../../../context/context';
 
-import Card from '../UI/Card/Card';
+import Card from '../../UI/Card/Card';
 
 import styles from './GameField.module.css';
 

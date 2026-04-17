@@ -9,7 +9,9 @@ const WinTimer = () => {
 
 	return (
 		<div className={styles.winTime}>
-			{time > 0 && !gameStart ? <h5>Win, time: {formatTime(time)}</h5> : null}
+			{time > 0 && !gameStart ? (
+				<h5>You win! Time: {formatTime(time)}</h5>
+			) : null}
 		</div>
 	);
 };
