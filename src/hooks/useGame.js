@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import playersAPI from '../api/playersAPI.js';
+import playersAPI from '../api/index.js';
 import { randomCardsArr } from '../initial/indexInitial.js';
 
 const useGame = () => {
@@ -32,7 +32,7 @@ const useGame = () => {
 
 	const gameVariants = ['browser', 'tech', 'game'];
 
-	const changeGameVariatn = (variant) => {
+	const changeGameVariant = (variant) => {
 		setGameVariant(variant);
 		startNewGame(variant);
 	};
@@ -124,7 +124,7 @@ const useGame = () => {
 		setTime,
 		gameVariant,
 		gameVariants,
-		changeGameVariatn,
+		changeGameVariant,
 	};
 };
 

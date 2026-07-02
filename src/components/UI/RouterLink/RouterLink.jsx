@@ -1,3 +1,5 @@
+import { BASE_URL } from '../../../api/constants';
+
 import styles from './RouterLink.module.css';
 
 const RouterLink = (props) => {
@@ -12,7 +14,7 @@ const RouterLink = (props) => {
 
 	return (
 		<a
-			href={href}
+			href={`${BASE_URL}${href}`}
 			onClick={routerLinkClick}
 			className={styles.link}
 			{...rest}

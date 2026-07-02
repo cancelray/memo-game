@@ -7,7 +7,7 @@ import Button from '../../UI/Button/Button';
 import styles from './GameVariant.module.css';
 
 const GameVariant = () => {
-	const { gameVariants, changeGameVariatn } = useContext(GameContext);
+	const { gameVariants, changeGameVariant } = useContext(GameContext);
 
 	return (
 		<div className={styles.gameVariant}>
@@ -16,7 +16,7 @@ const GameVariant = () => {
 				{gameVariants.map((variant, i) => (
 					<Button
 						key={i}
-						onClick={() => changeGameVariatn(variant)}
+						onClick={() => changeGameVariant(variant)}
 					>
 						{variant}
 					</Button>

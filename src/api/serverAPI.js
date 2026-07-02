@@ -3,7 +3,7 @@ const headers = {
 	'Content-Type': 'application/json',
 };
 
-const playersAPI = {
+const serverAPI = {
 	getPlayers: () => {
 		return fetch(URL).then((response) => response.json());
 	},
@@ -17,4 +17,4 @@ const playersAPI = {
 	},
 };
 
-export default playersAPI;
+export default serverAPI;

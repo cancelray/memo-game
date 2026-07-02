@@ -4,16 +4,16 @@ import styles from './Header.module.css';
 const Header = () => {
 	return (
 		<header className={styles.header}>
-			<RouterLink href='/'>
+			<RouterLink href='./'>
 				<img
 					className={styles.logo}
-					src='/logo.png'
+					src={`${import.meta.env.BASE_URL}logo.png`}
 					alt='logo'
 				/>
 			</RouterLink>
 			<div className={styles.links}>
-				<RouterLink href='/game'>Game</RouterLink>
-				<RouterLink href='/leaderboard'>Leaderboard</RouterLink>
+				<RouterLink href='game'>Game</RouterLink>
+				<RouterLink href='leaderboard'>Leaderboard</RouterLink>
 			</div>
 		</header>
 	);

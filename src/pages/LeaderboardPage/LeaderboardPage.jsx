@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { GameContext } from '../../context/context';
 
-import playersAPI from '../../api/playersAPI';
+import playersAPI from '../../api/index.js';
 
 import RouterLink from '../../components/UI/RouterLink/RouterLink';
 import styles from './LeaderboardPage.module.css';
@@ -28,7 +28,7 @@ const LeaderboardPage = () => {
 					</li>
 				))}
 			</ol>
-			<RouterLink href='/game'>Play</RouterLink>
+			<RouterLink href='game'>Play</RouterLink>
 		</div>
 	);
 };

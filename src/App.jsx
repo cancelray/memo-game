@@ -28,8 +28,8 @@ function App() {
 		setTime,
 		gameVariant,
 		gameVariants,
-		setGameVariatn,
-		changeGameVariatn,
+		setGameVariant,
+		changeGameVariant,
 	} = useGame();
 
 	const {
@@ -79,8 +79,8 @@ function App() {
 				deleteName,
 				gameVariant,
 				gameVariants,
-				setGameVariatn,
-				changeGameVariatn,
+				setGameVariant,
+				changeGameVariant,
 			}}
 		>
 			<Header />

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import playersAPI from '../api/playersAPI';
+import playersAPI from '../api/index.js';
 
 const useTimer = (
 	time,

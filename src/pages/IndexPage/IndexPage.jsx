@@ -5,8 +5,8 @@ import styles from './IndexPage.module.css';
 const IndexPage = () => {
 	return (
 		<div className={styles.indexPage}>
-			<RouterLink href='/game'>Game</RouterLink>
-			<RouterLink href='/leaderboard'>Leaderboard</RouterLink>
+			<RouterLink href='game'>Game</RouterLink>
+			<RouterLink href='leaderboard'>Leaderboard</RouterLink>
 		</div>
 	);
 };
