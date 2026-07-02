@@ -5,7 +5,7 @@ import useUserName from './hooks/useUserName';
 import { GameContext } from './context/context';
 
 import PageNotFound from './components/404/PageNotFound';
-import Header from './components/Header/Header';
+import Header from './components/header/Header';
 import GamePage from './pages/GamePage/GamePage';
 import IndexPage from './pages/IndexPage/IndexPage';
 import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage';
