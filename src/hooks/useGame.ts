@@ -1,98 +1,86 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import playersAPI from '../api/index.js';
-import { randomCardsArr } from '../initial/indexInitial.js';
+import playersAPI from '../api/index.ts';
+
+import { randomCardsArr } from '../initial/indexInitial.ts';
+
+import type { CardType } from '../types/Card.type.ts';
+import type { Winner } from '../types/Winner.type.ts';
+
+import { setBestTimeArr } from '../store/bestTimeArr.slice.ts';
+import { selectCardsArr, setCardsArr } from '../store/cardsArr.slice.ts';
+import {
+	closeAllCards,
+	openCard,
+	selectCardShow,
+} from '../store/cardShow.slice.ts';
+import {
+	selectGameVariant,
+	setGameVariant,
+} from '../store/gameVariant.slice.ts';
+import {
+	clearTwoOpenCards,
+	openFirstCard,
+	openSecondCard,
+	selectOpenCards,
+} from '../store/openCards.slice.ts';
+import { setTimeToZero } from '../store/time.slice.ts';
 
 const useGame = () => {
-	const [gameVariant, setGameVariant] = useState('browser');
-	const [cardsArr, setCardsArr] = useState(() => randomCardsArr(gameVariant));
-	const [cardShow, setCardShow] = useState([
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-		false,
-	]);
-	const [openCards, setOpenCards] = useState({
-		firstCard: null,
-		firstCardId: null,
-		secondCard: null,
-		secondCardId: null,
-	});
-	const [gameStart, setGameStart] = useState(false);
-	const [time, setTime] = useState(0);
-	const [bestTimeArr, setBestTimeArr] = useState([]);
+	const dispatch = useDispatch();
 
-	const gameVariants = ['browser', 'tech', 'game'];
+	const cardsArr = useSelector(selectCardsArr);
+	const cardShow = useSelector(selectCardShow);
+	const openCards = useSelector(selectOpenCards);
+	const gameVariant = useSelector(selectGameVariant);
 
-	const changeGameVariant = (variant) => {
-		setGameVariant(variant);
+	const [gameStart, setGameStart] = useState<boolean>(false);
+
+	const gameVariants: string[] = ['browser', 'tech', 'game'];
+
+	const startNewGame = (variant: string) => {
+		setGameStart(false);
+
+		const newCardsArr = randomCardsArr(variant);
+		dispatch(setCardsArr(newCardsArr));
+
+		dispatch(closeAllCards());
+		dispatch(clearTwoOpenCards());
+
+		dispatch(setTimeToZero());
+	};
+
+	const changeGameVariant = (variant: string) => {
+		dispatch(setGameVariant(variant));
 		startNewGame(variant);
 	};
 
-	const startNewGame = (variant) => {
-		setGameStart(false);
-
-		setCardsArr(() => randomCardsArr(variant));
-
-		setCardShow([
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-		]);
-
-		setOpenCards({
-			firstCard: null,
-			firstCardId: null,
-			secondCard: null,
-			secondCardId: null,
-		});
-
-		setTime(0);
-	};
-
-	const cardClick = (event) => {
-		if (!gameStart && cardShow.every((value) => value === false)) {
-			setGameStart(true);
-		}
-
-		setCardShow((prev) => {
-			prev[event.target.id] = true;
-			return [...prev];
-		});
-
-		if (!openCards.firstCard) {
-			setOpenCards((prev) => {
-				prev.firstCard = cardsArr[event.target.id].value;
-				prev.firstCardId = event.target.id;
-				return { ...prev };
-			});
+	const cardClick = (event: React.MouseEvent<HTMLDivElement>) => {
+		if (openCards.firstCard && openCards.secondCard) {
 			return;
 		}
 
-		if (!openCards.secondCard && event.target.id !== openCards.firstCardId) {
-			setOpenCards((prev) => {
-				prev.secondCard = cardsArr[event.target.id].value;
-				prev.secondCardId = event.target.id;
-				return { ...prev };
-			});
+		if (!gameStart && cardShow?.every((value) => value === false)) {
+			setGameStart(true);
+		}
 
+		const eventTarget = event.target as HTMLDivElement;
+		const targetId = Number(eventTarget.id);
+
+		if (cardShow[targetId]) {
+			return;
+		}
+
+		dispatch(openCard(targetId));
+
+		if (!openCards.firstCard) {
+			dispatch(openFirstCard({ cardsArr, targetId }));
+			return;
+		}
+
+		if (!openCards.secondCard && targetId !== openCards.firstCardId) {
+			dispatch(openSecondCard({ cardsArr, targetId }));
 			return;
 		}
 	};
@@ -100,28 +88,24 @@ const useGame = () => {
 	useEffect(() => {
 		playersAPI.getPlayers().then((data) => {
 			if (data.length < 5) {
-				setBestTimeArr(data);
+				dispatch(setBestTimeArr(data));
 			} else {
-				const topFive = data.sort((a, b) => a.time - b.time).slice(0, 5);
-				setBestTimeArr(topFive);
+				const topFive = data
+					.sort((a: Winner, b: Winner) => a.time - b.time)
+					.slice(0, 5);
+				dispatch(setBestTimeArr(topFive));
 			}
 		});
-	}, []);
+
+		const newCardsArr: CardType[] = randomCardsArr(gameVariant);
+		dispatch(setCardsArr(newCardsArr));
+	}, [dispatch, gameVariant]);
 
 	return {
-		cardsArr,
-		cardShow,
-		setCardShow,
-		openCards,
-		setOpenCards,
 		gameStart,
 		setGameStart,
 		startNewGame,
-		bestTimeArr,
-		setBestTimeArr,
 		cardClick,
-		time,
-		setTime,
 		gameVariant,
 		gameVariants,
 		changeGameVariant,

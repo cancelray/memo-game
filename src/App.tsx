@@ -1,34 +1,27 @@
+import { useMemo } from 'react';
+
 import useGame from './hooks/useGame';
 import useTimer from './hooks/useTimer';
 import useUserName from './hooks/useUserName';
 
 import { GameContext } from './context/context';
 
+import Router from './Router';
+
 import PageNotFound from './components/404/PageNotFound';
 import Header from './components/header/Header';
 import GamePage from './pages/GamePage/GamePage';
 import IndexPage from './pages/IndexPage/IndexPage';
 import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage';
-import Router from './Router';
 
 function App() {
 	const {
-		cardsArr,
-		cardShow,
-		setCardShow,
-		openCards,
-		setOpenCards,
 		gameStart,
 		setGameStart,
 		startNewGame,
-		bestTimeArr,
-		setBestTimeArr,
+
 		cardClick,
-		time,
-		setTime,
-		gameVariant,
 		gameVariants,
-		setGameVariant,
 		changeGameVariant,
 	} = useGame();
 
@@ -40,18 +33,7 @@ function App() {
 		deleteName,
 	} = useUserName();
 
-	const { formatTime } = useTimer(
-		time,
-		setTime,
-		openCards,
-		setOpenCards,
-		cardShow,
-		setCardShow,
-		gameStart,
-		setGameStart,
-		setBestTimeArr,
-		userName,
-	);
+	const { formatTime } = useTimer(gameStart, setGameStart, userName);
 
 	const routes = {
 		'/': IndexPage,
@@ -60,29 +42,37 @@ function App() {
 		'*': PageNotFound,
 	};
 
+	const value = useMemo(
+		() => ({
+			cardClick,
+			formatTime,
+			gameStart,
+			startNewGame,
+			userName,
+			addUserName,
+			userNameValue,
+			userNameInputChange,
+			deleteName,
+			gameVariants,
+			changeGameVariant,
+		}),
+		[
+			cardClick,
+			formatTime,
+			gameStart,
+			startNewGame,
+			userName,
+			addUserName,
+			userNameValue,
+			userNameInputChange,
+			deleteName,
+			gameVariants,
+			changeGameVariant,
+		],
+	);
+
 	return (
-		<GameContext.Provider
-			value={{
-				cardsArr,
-				cardClick,
-				cardShow,
-				openCards,
-				time,
-				formatTime,
-				gameStart,
-				startNewGame,
-				bestTimeArr,
-				userName,
-				addUserName,
-				userNameValue,
-				userNameInputChange,
-				deleteName,
-				gameVariant,
-				gameVariants,
-				setGameVariant,
-				changeGameVariant,
-			}}
-		>
+		<GameContext.Provider value={value}>
 			<Header />
 			<Router routes={routes} />
 		</GameContext.Provider>

@@ -1,11 +1,15 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
-import { GameContext } from '../../../context/context';
+import { selectTime } from '../../../store/time.slice';
+
+import useGameContext from '../../../hooks/context/useGameContext';
 
 import styles from './Timer.module.css';
 
 const Timer = () => {
-	const { time, formatTime } = useContext(GameContext);
+	const time = useSelector(selectTime);
+
+	const { formatTime } = useGameContext();
 
 	return <div className={styles.timer}>{formatTime(time)}</div>;
 };

@@ -1,11 +1,15 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
-import { GameContext } from '../../../context/context';
+import { selectBestTimeArr } from '../../../store/bestTimeArr.slice';
+
+import useGameContext from '../../../hooks/context/useGameContext';
 
 import styles from './BestTime.module.css';
 
 const BestTime = () => {
-	const { bestTimeArr, formatTime } = useContext(GameContext);
+	const bestTimeArr = useSelector(selectBestTimeArr);
+
+	const { formatTime } = useGameContext();
 
 	return (
 		<div className={styles.bestTimes}>

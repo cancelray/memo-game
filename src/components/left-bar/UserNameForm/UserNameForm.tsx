@@ -1,8 +1,6 @@
-import { useContext } from 'react';
-
 import Button from '../../UI/Button/Button';
 
-import { GameContext } from '../../../context/context';
+import useGameContext from '../../../hooks/context/useGameContext';
 
 import styles from './UserNameForm.module.css';
 
@@ -13,7 +11,7 @@ const UserNameForm = () => {
 		userNameValue,
 		userNameInputChange,
 		deleteName,
-	} = useContext(GameContext);
+	} = useGameContext();
 
 	return (
 		<div className={styles.userNameDiv}>

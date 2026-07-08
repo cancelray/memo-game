@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { BASE_URL } from './api/constants';
+import type { RouterProps } from './types/props/RouterProps.type';
 
 const useRoute = () => {
 	const getCurrentPath = () => {
@@ -28,7 +29,7 @@ const useRoute = () => {
 	return path;
 };
 
-const Router = (props) => {
+const Router = (props: RouterProps) => {
 	const { routes } = props;
 	const path = useRoute();
 

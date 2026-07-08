@@ -1,13 +1,17 @@
-import { useContext } from 'react';
-
-import { GameContext } from '../../../context/context';
+import { useSelector } from 'react-redux';
 
 import Button from '../../UI/Button/Button';
+
+import { selectGameVariant } from '../../../store/gameVariant.slice';
+
+import useGameContext from '../../../hooks/context/useGameContext';
 
 import styles from './StartNewGame.module.css';
 
 const StartNewGame = () => {
-	const { startNewGame, gameVariant } = useContext(GameContext);
+	const gameVariant = useSelector(selectGameVariant);
+
+	const { startNewGame } = useGameContext();
 
 	return (
 		<div className={styles.newGame}>

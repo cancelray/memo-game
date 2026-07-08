@@ -1,6 +1,8 @@
+import type { ButtonProps } from '../../../types/props/ButtonProps.type';
+
 import styles from './Button.module.css';
 
-const Button = (props) => {
+const Button = (props: ButtonProps) => {
 	const { onClick, children } = props;
 	return (
 		<button

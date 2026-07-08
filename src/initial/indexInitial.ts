@@ -6,18 +6,22 @@ import browserImg from '../assets/browserIMG/browser.png';
 import gameIMG from '../assets/gameIMG/game.png';
 import techIMG from '../assets/techIMG/tech.png';
 
-export const randomCardsArr = (variant) => {
+import type { CardType } from '../types/Card.type';
+
+export const randomCardsArr = (variant: string): CardType[] => {
 	switch (variant) {
 		case 'browser':
-			return browserArr.sort(() => Math.random() - 0.5);
+			return [...browserArr].sort(() => Math.random() - 0.5);
 		case 'tech':
-			return techArr.sort(() => Math.random() - 0.5);
+			return [...techArr].sort(() => Math.random() - 0.5);
 		case 'game':
-			return gameArr.sort(() => Math.random() - 0.5);
+			return [...gameArr].sort(() => Math.random() - 0.5);
+		default:
+			return [...browserArr].sort(() => Math.random() - 0.5);
 	}
 };
 
-export const cardBack = (variant) => {
+export const cardBack = (variant: string) => {
 	switch (variant) {
 		case 'browser':
 			return browserImg;
@@ -25,5 +29,7 @@ export const cardBack = (variant) => {
 			return techIMG;
 		case 'game':
 			return gameIMG;
+		default:
+			return browserImg;
 	}
 };

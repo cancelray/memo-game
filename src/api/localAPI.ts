@@ -1,6 +1,8 @@
+import type { Winner } from '../types/Winner.type';
+
 const STORAGE_KEY = 'players';
 
-const read = () => {
+const read = (): Winner[] => {
 	try {
 		return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 	} catch (error) {
@@ -9,8 +11,8 @@ const read = () => {
 	}
 };
 
-const write = (newWinner) => {
-	localStorage.setItem(STORAGE_KEY, JSON.stringify(newWinner));
+const write = (winners: Winner[]) => {
+	localStorage.setItem(STORAGE_KEY, JSON.stringify(winners));
 };
 
 const delay = (ms = 150) => {
@@ -24,7 +26,7 @@ const localAPI = {
 		return read();
 	},
 
-	addTime: async (newWinner) => {
+	addTime: async (newWinner: Winner) => {
 		await delay();
 
 		write([...read(), newWinner]);

@@ -6,7 +6,7 @@ const useUserName = () => {
 	);
 	const [userNameValue, setUserNameValue] = useState('');
 
-	const addUserName = (event) => {
+	const addUserName = (event: React.SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const clearInput = userNameValue.trim();
 
@@ -20,7 +20,7 @@ const useUserName = () => {
 		}
 	};
 
-	const userNameInputChange = (event) => {
+	const userNameInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUserNameValue(event.target.value);
 	};
 
