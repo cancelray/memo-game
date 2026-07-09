@@ -23,3 +23,14 @@
 .leaderboardList li {
 	list-style-position: inside;
 }
+
+.link {
+	margin-bottom: 10px;
+	font-size: 20px;
+	text-decoration: none;
+	color: greenyellow;
+}
+
+.link:hover {
+	text-decoration: underline greenyellow;
+}

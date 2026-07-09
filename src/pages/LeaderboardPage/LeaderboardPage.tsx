@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import playersAPI from '../../api/index.ts';
-
-import RouterLink from '../../components/UI/RouterLink/RouterLink';
 
 import useGameContext from '../../hooks/context/useGameContext.ts';
 
@@ -33,7 +32,7 @@ const LeaderboardPage = () => {
 					</li>
 				))}
 			</ol>
-			<RouterLink href='game'>Play</RouterLink>
+			<NavLink to='/game' className={styles.link}>Play</NavLink>
 		</div>
 	);
 };
