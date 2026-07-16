@@ -73,20 +73,6 @@ const useTimer = (
 								time: timeRef.current,
 							}),
 						);
-						// setBestTimeArr((prev) => {
-						// 	if (prev.length < 5) {
-						// 		return [...prev, newWinner].sort((a, b) => a.time - b.time);
-						// 	} else {
-						// 		const index = prev.findIndex((el) => el.time > timeRef.current);
-						// 		if (index === -1) {
-						// 			return [...prev];
-						// 		} else {
-						// 			return [...prev, newWinner]
-						// 				.sort((a, b) => a.time - b.time)
-						// 				.slice(0, -1);
-						// 		}
-						// 	}
-						// });
 					}
 				}
 

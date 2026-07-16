@@ -23,7 +23,7 @@ const GameField = () => {
 		<div className={styles.field}>
 			{cardsArr.map((card: CardType, i: number) => (
 				<Card
-					key={i}
+					key={card.id}
 					id={i}
 					cardShow={cardShow[i]}
 					cardClick={cardClick}
